@@ -1,0 +1,42 @@
+<ion-view view-title="connexion" hide-nav-bar="true">
+  <ion-content class="marge_haut">
+    <div class="padding">
+      <!--<h2 style="color: #ff6600; text-align: center">CookCooning</h2>-->
+      <img style="width: 100%" src="../img/logo.png">
+    </div>
+    <form ng-submit="doLogin()" class="marge_from_haut" name="myForm">
+      <div class="list padding padding_bottom_null">
+        <label class="item item-input">
+          <span class="input-label">Email</span>
+          <input type="email" name="email" ng-model="loginData.email" required>
+        </label>
+        <label class="item item-input">
+          <span class="input-label">Mot de passe</span>
+          <input type="password" ng-model="loginData.password" required>
+        </label>
+      </div>
+      <div class="padding padding_top_null">
+        <label>
+          <button class="button button-block button-positive" type="submit">Connexion</button>
+        </label>
+      </div>
+      <div class="padding">
+                <span class="couleur_rouge" ng-show="myForm.email.$error.email">
+                    Adresse email invalide.
+                </span>
+        <span class="couleur_rouge">{{error}}</span>
+      </div>
+    </form>
+
+    <div class="row marge_haut">
+      <div class="col text-center"><a ui-sref="bar.email_reset()">Mot de passe oublié?</a></div>
+    </div>
+    <!--<div class="row" style="padding-top: 50%">
+        <div class="col"></div>
+        <div class="col-80 text-center">
+            <img style="width: 100%" src="../img/logo.png">
+        </div>
+        <div class="col"></div>
+    </div>-->
+  </ion-content>
+</ion-view>

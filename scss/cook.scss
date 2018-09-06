@@ -1,0 +1,152 @@
+
+/* Empty. Add your own CSS if you like */
+.padding_top_null{
+  padding-top: 0px;
+}
+
+.padding_bottom_null{
+  padding-bottom: 0px;
+}
+.marge_haut{
+  padding-top: 20%;
+}
+.marge_from_haut{
+  padding-top: 20%;
+}
+.couleur_rouge{
+  color: red;
+}
+.compte_commande{
+  position: absolute;
+  top:0px;
+  left: 32px;
+}
+
+/*on gere le css des popup a ce niveau*/
+.popup_produit_detail .popup-body{
+  padding: 0px;
+}
+
+.popup_produit_detail .popup-head{
+  padding: 0;
+  border:none;
+  /*border-bottom: 1px solid #eee;
+  text-align: center;*/
+}
+.popup_produit_detail .popup-buttons{
+  padding: 0px;
+  min-height: 40px;
+}
+/*cette classe permet de dimunuer le padding du popup*/
+.dimunue_padding_popup{
+  padding: 2px;
+}
+
+/*bonne position du chariot en haut*/
+.bar .title + .button:last-child, .bar > .button + .button:last-child, .bar > .button.pull-right, .bar .buttons.pull-right, .bar .title + .buttons {
+  position: absolute;
+  top: 5px;
+  right: 16px;
+  bottom: 5px;
+}
+
+/*pour arranger le texte du select dans le item*/
+.item_select_popup{
+  direction: ltr;
+  padding: 0 50px 0 16px;
+
+}
+
+/*on customise l'affichage du popup de la commande*/
+.popup_commande .popup-head{
+  background-color: #ff6600;
+}
+
+.popup_commande .popup-buttons{
+  padding: 0px;
+  min-height: 40px;
+}
+
+.popup_commande .popup-head .popup-title{
+  color: white;
+}
+/*css du bouton ajouter au panier a ce niveau*/
+.button_ajout_panier{
+  padding: 0 5px;
+  min-height: 26px;
+  font-size: 12px;
+  line-height: 26px;
+  border-radius: 10px;
+}
+
+/*ceci permet de bien positionner le texte du bouton a l'interieur du cadre*/
+p .button:after{
+  right: 0px;
+}
+.nombre_commande{
+  color: rgb(255, 102, 0);
+  font-family: inherit;
+  background-color: white;
+  border-radius: 50%;
+  min-width: 15px;
+  min-height: 15px;
+  line-height: 15px;
+  text-align: center;
+  font-size: 12px;
+  padding: 2px;
+}
+.reduction{
+  color: white;
+  font-family: inherit;
+  background-color: #f68b1e;
+  //border-radius: 50%;
+  min-width: 15px;
+  min-height: 15px;
+  line-height: 15px;
+  text-align: center;
+  font-size: 12px;
+  padding: 2px;
+}
+
+.ancien_prix{
+  text-decoration: line-through;
+  font-size: 11px;
+}
+.affichage_liste_commande{
+  text-align: right;
+  padding: 0px;
+}
+.affichage_liste_commande_gauche{
+  text-align: left;
+  padding: 0px;
+}
+.button_signal_erreur{
+  min-height: 26px;
+  font-size: 12px;
+  line-height: 26px;
+  border-radius: 10px;
+}
+.affichage_status_commande{
+  text-align: right;
+  color: green;
+}
+
+.couleur_app{
+  color: #ff6600;
+}
+.loading{
+  background-color: #ff6600 !important;
+}
+.spinner.light svg {
+  stroke: #fff !important;
+  fill: #fff !important;
+}
+
+/*gestion du slide de notre popover*/
+.customTrans {
+  -webkit-transition: all 1s ease-out;
+  -moz-transition: all 1s ease-out;
+  -ms-transition: all 1s ease-out;
+  -o-transition: all 1s ease-out;
+  transition: all 1s ease-out;
+}

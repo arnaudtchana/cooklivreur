@@ -18,6 +18,7 @@ App
           $sessionStorage.token = response.data.token;
           $sessionStorage.data = response.data;
           $rootScope.userData = response.data.client;
+          $sessionStorage.commands = response.data.commands;
           console.log("voici les donnees du user",$rootScope.userData)
           console.log($sessionStorage.data);
           $state.go('tab.livraison');

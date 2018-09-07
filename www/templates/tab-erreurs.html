@@ -4,8 +4,62 @@
     </button>
   </ion-nav-buttons>
   <ion-content>
-    <ion-list>
-      <p>la liste des erreurs ici</p>
-    </ion-list>
+    <div class="card" ng-if="commande.status ==2 && commande.command_error_id!==null" ng-repeat="commande in liste_commande track by $index" ng-click="detail_commande($index)">
+      <div>
+        <div class="row">
+          <div class="col"></div>
+          <div class="col-80 text-center"><h6>{{commande.command_number}}</h6></div>
+          <div class="col"></div>
+          <!--<div class="col affichage_liste_commande_gauche">Numéro commande:</div>
+          <div class="col affichage_liste_commande">{{commande.command_number}}</div>-->
+        </div>
+        <div class="row">
+          <div class="col affichage_liste_commande_gauche">Montant total:</div>
+          <div class="col affichage_liste_commande">
+            {{commande.amount + commande.profile.delivery_amount | number:2}} €</div>
+        </div>
+        <div class="row">
+          <div class="col affichage_liste_commande_gauche">Livraison:</div>
+          <div class="col affichage_liste_commande">
+            {{commande.profile.delivery_amount | number:2}} € </div>
+        </div>
+        <div class="row">
+          <div class="col affichage_liste_commande_gauche">Heure commande:</div>
+          <div class="col affichage_liste_commande">{{commande.command_date | date: format:'HH:mm:ss'}}</div>
+        </div>
+        <div class="row">
+          <div class="col affichage_liste_commande_gauche">Heure livraison:</div>
+          <div class="col affichage_liste_commande">{{commande.delivery_date | date: format:'HH:mm:ss' }}</div>
+        </div>
+        <div class="row">
+          <div class="col affichage_liste_commande_gauche">Nom:</div>
+          <div class="col affichage_liste_commande">{{commande.client.name}}</div>
+        </div>
+        <div class="row">
+          <div class="col affichage_liste_commande_gauche">Téléphone:</div>
+          <div class="col affichage_liste_commande">{{commande.client.phone}}</div>
+        </div>
+        <div class="row">
+          <div class="col"></div>
+          <div class="col-80 text-center"><h6>{{commande.client.address}}</h6></div>
+          <div class="col"></div>
+        </div>
+
+        <div class="row">
+          <div class="col text-center" style="color: red">
+            {{commande.command_error.description}}
+          </div>
+        </div>
+        <!--<div class="row" ng-if="commande.status ==1 && commande.command_error==null">
+          <div class="col"></div>
+          <div class="col col-50 text-center">
+            <a  ng-click="commande_livrer($index)" class="button  button-balanced button_ajout_panier">
+              Livré</a>
+          </div>
+          <div class="col"></div>
+        </div>-->
+      </div>
+    </div>
+
   </ion-content>
 </ion-view>

@@ -5,7 +5,7 @@
   </ion-nav-buttons>
   <ion-content>
     <h5 style="text-align: center" ng-if="taille_tableau==0">Aucune commande assignée</h5>
-    <div class="card" ng-if="commande.status !==2" ng-repeat="commande in liste_commande track by $index" ng-click="detail_commande($index)">
+    <div class="card" ng-if="commande.status !==2" ng-repeat="commande in liste_commande track by $index">
       <div>
         <div class="row">
           <div class="col"></div>
@@ -47,12 +47,14 @@
         </div>
 
         <div class="row" ng-if="commande.status ==1 && commande.command_error==null">
-          <div class="col"></div>
-          <div class="col col-50 text-center">
+          <div class="col text-center">
             <a  ng-click="commande_livrer($index)" class="button  button-balanced button_ajout_panier">
               Livré</a>
           </div>
-          <div class="col"></div>
+          <div class="col text-center">
+            <a  ng-click="detail_commande($index)" class="button  button-energized button_ajout_panier">
+              Détails</a>
+          </div>
         </div>
       </div>
     </div>

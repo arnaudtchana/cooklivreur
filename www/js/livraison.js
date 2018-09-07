@@ -4,9 +4,19 @@ controller('LivraisonCtrl', function($scope,$state,$ionicLoading,$sessionStorage
   $scope.$on('$ionicView.enter', function(e) {
 
     /*on recupere la liste des commandes dun utilisateur*/
-    $scope.liste_commande = $sessionStorage.commands;
-    console.log($sessionStorage.commands)
-    $scope.taille_tableau = $sessionStorage.commands.length;
+    $ionicLoading.show({
+      templateUrl : 'templates/loading.html'
+    });
+    var Liste_commande = Restangular.one('delivery-man/command');
+    Liste_commande.get().then(function (response) {
+      $scope.liste_commande = response.commands;
+      $scope.taille_tableau = response.commands.length;
+      $ionicLoading.hide();
+    },function (error) {
+      $ionicLoading.hide();
+console.log('error')
+    })
+
   });
 
   $scope.commande_livrer = function(index){
@@ -29,7 +39,12 @@ controller('LivraisonCtrl', function($scope,$state,$ionicLoading,$sessionStorage
 
       popupResult.then(function (response) {
         /*lorskil ferme le popup, on recharge la liste des produits kil doit livrer*/
+        Liste_commande.get().then(function (response) {
+          $scope.liste_commande = response.commands;
+          $scope.taille_tableau = response.commands.length;
+        },function (error) {
 
+        })
       })
     },function (error) {
       $ionicLoading.hide();
@@ -40,6 +55,18 @@ controller('LivraisonCtrl', function($scope,$state,$ionicLoading,$sessionStorage
   /*liste des details sur une commande donnee*/
   $scope.detail_commande = function(index){
     /*on recupere lindex dune commande et on renvoie la liste des details sur la commande en question*/
+    $scope.cart = $scope.liste_commande[index].command_lines;
+   var Detail = $ionicPopup.show({
+      cssClass: 'popup_produit_detail',
+      templateUrl: 'templates/popup-detail-commande.html',
+      scope: $scope,
+      buttons: [
+        {
+          text: '<b>Ok</b>',
+          type: 'button-positive',
+        }
+      ]
+    });
   }
     /*fonction permettant de decoonecter un utilisateur*/
     $scope.logout = function () {

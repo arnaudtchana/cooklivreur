@@ -1,0 +1,20 @@
+<div ng-repeat="item in cart">
+  <ion-item>
+    <img ng-src="{{item.product.image}}" width="100%" height="auto" style="width: 100%; height: auto;">
+    <p style="text-align: center">{{item.product.name}}</p>
+    <div>
+      <p style="text-align: center">{{item.quantity}} x {{item.price}} € =
+        <strong>{{ item.quantity *  item.price  | number:2}} €</strong>
+      </p>
+    </div>
+
+    <!--the bottom buttons for cart items-->
+    <!--<div class="button-bar">
+      <button ng-click="removeFromCart(item.cart_item_id)" class="button button-assertive button-block button-small icon ion-android-delete" ></button>
+      <button class="button button-stable button-clear button-block  icon ion-minus" ng-click="dec(item)" ></button>
+      <button class="button button-stable button-clear button-block button-small">{{item.cart_item_qty}}</button>
+      <button class="button button-stable button-clear button-block button-small icon ion-plus" ng-click="inc(item.cart_item_id)"></button>
+
+    </div>-->
+  </ion-item>
+</div>

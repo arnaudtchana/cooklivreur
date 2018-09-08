@@ -23,33 +23,54 @@ console.log('error')
     /*ici l'index de la commande qui a ete livrer*/
     console.log('voici lide de la commande',$scope.liste_commande[index].id)
     console.log('voici la commande',$scope.liste_commande[index])
-    $ionicLoading.show({
-      templateUrl : 'templates/loading.html'
+    /*on met un popup a ce niveau pour confirmer la livraison*/
+    var PopupDelete = $ionicPopup.show({
+      cssClass: 'popup_commande',
+      template: 'Vous confirmez que la commande est livrée?',
+      title: 'Confirmation',
+      scope: $scope,
+      buttons: [
+        { text: 'Non' },
+        {
+          text: '<b>Oui</b>',
+          type: 'button-positive',
+          onTap:function(){
+            PopupDelete.close();
+            $ionicLoading.show({
+              templateUrl : 'templates/loading.html'
+            });
+            var Confirmation_commande = Restangular.one('command/'+$scope.liste_commande[index].id+'/confirm-delivery');
+            Confirmation_commande.post().then(function (response) {
+              $ionicLoading.hide();
+              console.log(response);
+              //$scope.liste_commande.splice(index);
+              var popupResult = $ionicPopup.alert({
+                cssClass: 'popup_commande',
+                title: 'Information',
+                template: response.message
+              });
+
+              popupResult.then(function (response) {
+                /*lorskil ferme le popup, on recharge la liste des produits kil doit livrer*/
+                /*on change simplement le staut de ce kil vient de livrer pour que ca ne saffiche plus*/
+                $scope.liste_commande[index].status = 2;
+                /*Liste_commande.get().then(function (response) {
+                  $scope.liste_commande = response.commands;
+                  $scope.taille_tableau = response.commands.length;
+                },function (error) {
+
+                })*/
+              })
+            },function (error) {
+              $ionicLoading.hide();
+              console.log(error)
+            })
+
+          }
+        }
+      ]
     });
-    var Confirmation_commande = Restangular.one('command/'+$scope.liste_commande[index].id+'/confirm-delivery');
-    Confirmation_commande.post().then(function (response) {
-      $ionicLoading.hide();
-      console.log(response);
-      //$scope.liste_commande.splice(index);
-      var popupResult = $ionicPopup.alert({
-        cssClass: 'popup_commande',
-        title: 'Information',
-        template: response.message
-      });
 
-      popupResult.then(function (response) {
-        /*lorskil ferme le popup, on recharge la liste des produits kil doit livrer*/
-        Liste_commande.get().then(function (response) {
-          $scope.liste_commande = response.commands;
-          $scope.taille_tableau = response.commands.length;
-        },function (error) {
-
-        })
-      })
-    },function (error) {
-      $ionicLoading.hide();
-      console.log(error)
-    })
   }
 
   /*liste des details sur une commande donnee*/

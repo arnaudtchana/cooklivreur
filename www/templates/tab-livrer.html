@@ -4,11 +4,11 @@
     </button>
   </ion-nav-buttons>
   <ion-content>
-    <div class="card" ng-if="commande.status ==2" ng-repeat="commande in liste_commande track by $index" ng-click="detail_commande($index)">
+    <div class="card" ng-if="commande.status ==2" ng-repeat="commande in liste_commande track by $index">
       <div>
         <div class="row">
           <div class="col"></div>
-          <div class="col-80 text-center"><h6>{{commande.command_number}}</h6></div>
+          <div class="col-80 text-center"><h6 style="text-decoration: underline;color: #33cd5f" ng-click="detail_commande($index)">{{commande.command_number}}</h6></div>
           <div class="col"></div>
           <!--<div class="col affichage_liste_commande_gauche">Numéro commande:</div>
           <div class="col affichage_liste_commande">{{commande.command_number}}</div>-->
@@ -25,11 +25,11 @@
         </div>
         <div class="row">
           <div class="col affichage_liste_commande_gauche">Heure commande:</div>
-          <div class="col affichage_liste_commande">{{commande.command_date | date: format:'HH:mm:ss'}}</div>
+          <div class="col affichage_liste_commande">{{commande.command_date.split(" ")[1]}}</div>
         </div>
         <div class="row">
           <div class="col affichage_liste_commande_gauche">Heure livraison:</div>
-          <div class="col affichage_liste_commande">{{commande.delivery_date | date: format:'HH:mm:ss' }}</div>
+          <div class="col affichage_liste_commande">{{commande.delivery_date.split(" ")[1]}}</div>
         </div>
         <div class="row">
           <div class="col affichage_liste_commande_gauche">Nom:</div>

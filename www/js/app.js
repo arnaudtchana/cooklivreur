@@ -25,6 +25,25 @@ var App=angular.module('starter', ['ionic','satellizer','ngStorage','restangular
       // remove the status bar on iOS or change it to use white instead of dark colors.
       StatusBar.styleDefault();
     }
+    /*consentement du user*/
+    //window.plugins.OneSignal.provideUserConsent(true);
+    var notificationOpenedCallback = function(data) {
+      console.log('notificationOpenedCallback: ' + JSON.stringify(data));
+      alert("je recoit la notification")
+      if(data.notification.payload.additionalData.channel == 2){
+        /*on vient de vous attribuer une nouvelle commande on le redirige vers la page qui liste les commandes*/
+        alert("on vient de vous attribuer une commande")
+      }
+      if(data.notification.payload.additionalData.channel == 3){
+        /*on vient de relever une erreur sur une de vos commandes on le redirige vers la paage de gestion des erreurs*/
+        alert("Erreur relevée sur une commande")
+      }
+    };
+
+    window.plugins.OneSignal
+      .startInit("c5937f15-80f0-4eec-b535-84b5db486f58")
+      .handleNotificationOpened(notificationOpenedCallback)
+      .endInit();
   });
 })
 

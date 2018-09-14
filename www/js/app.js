@@ -8,7 +8,7 @@
 var ApiUrl = "https://at-deg.inimov-cloud.com/api/";
 var App=angular.module('starter', ['ionic','satellizer','ngStorage','restangular','ionic-toast','ngCordova'])
 
-.run(function($ionicPlatform) {
+.run(function($ionicPlatform,$state) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs).
@@ -16,8 +16,9 @@ var App=angular.module('starter', ['ionic','satellizer','ngStorage','restangular
     // least on iOS. It's a dead giveaway that an app is using a Web View. However, it's sometimes
     // useful especially with forms, though we would prefer giving the user a little more room
     // to interact with the app.
-    if (window.cordova && window.Keyboard) {
+    if (window.cordova && window.cordova.plugins && window.cordova.plugins.keyboard) {
       window.Keyboard.hideKeyboardAccessoryBar(true);
+      cordova.plugins.Keyboard.disableScroll(true);
     }
 
     if (window.StatusBar) {
@@ -27,12 +28,19 @@ var App=angular.module('starter', ['ionic','satellizer','ngStorage','restangular
     }
     /*consentement du user*/
     //window.plugins.OneSignal.provideUserConsent(true);
+    window.plugins.OneSignal.setSubscription(false);
     var notificationOpenedCallback = function(data) {
       console.log('notificationOpenedCallback: ' + JSON.stringify(data));
       alert("je recoit la notification")
       if(data.notification.payload.additionalData.channel == 2){
         /*on vient de vous attribuer une nouvelle commande on le redirige vers la page qui liste les commandes*/
         alert("on vient de vous attribuer une commande")
+        if($state.current.name == 'tab.livraison') {
+          /*on reload la page*/
+          location.reload();
+        }else{
+          /*on le redirige vers la page*/
+        }
       }
       if(data.notification.payload.additionalData.channel == 3){
         /*on vient de relever une erreur sur une de vos commandes on le redirige vers la paage de gestion des erreurs*/
@@ -44,6 +52,8 @@ var App=angular.module('starter', ['ionic','satellizer','ngStorage','restangular
       .startInit("c5937f15-80f0-4eec-b535-84b5db486f58")
       .handleNotificationOpened(notificationOpenedCallback)
       .endInit();
+
+    window.plugins.OneSignal.setSubscription(true);
   });
 })
 

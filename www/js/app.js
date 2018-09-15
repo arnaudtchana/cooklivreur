@@ -8,7 +8,7 @@
 var ApiUrl = "https://at-deg.inimov-cloud.com/api/";
 var App=angular.module('starter', ['ionic','satellizer','ngStorage','restangular','ionic-toast','ngCordova'])
 
-.run(function($ionicPlatform,$state) {
+.run(function($ionicPlatform,$state,$localStorage) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs).
@@ -25,6 +25,10 @@ var App=angular.module('starter', ['ionic','satellizer','ngStorage','restangular
       // Set the statusbar to use the default style, tweak this to
       // remove the status bar on iOS or change it to use white instead of dark colors.
       StatusBar.styleDefault();
+    }
+    if($localStorage.token){
+      $localStorage.new_connection = false;
+      $state.go('tab.livraison')
     }
     /*consentement du user*/
     //window.plugins.OneSignal.provideUserConsent(true);
@@ -137,7 +141,7 @@ var App=angular.module('starter', ['ionic','satellizer','ngStorage','restangular
         /*config.headers=["Access-Control-Allow-Origin", '*'];
         config.headers=['Access-Control-Allow-Methods', 'POST,GET,OPTIONS,PUT,DELETE'];
         config.headers=['Access-Control-Allow-Headers', 'Content-Type,Accept'];*/
-        config.url = config.url+"?token="+$sessionStorage.token;
+        config.url = config.url+"?token="+$localStorage.token;
         // console.log(config);
         /*en envoi la requette*/
         return config;
@@ -178,6 +182,8 @@ var App=angular.module('starter', ['ionic','satellizer','ngStorage','restangular
             // we can remove the current user from local storage
             //localStorage.removeItem('user');
             delete $sessionStorage.token;
+            $localStorage.token = undefined;
+
             // Send the user to the auth state so they can login
             $ionicLoading.hide();
             $state.go('connexion');

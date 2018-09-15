@@ -1,5 +1,5 @@
 App.
-controller('LivrerCtrl', function($scope,$state,$ionicLoading,$sessionStorage,Restangular,$auth,$ionicPopup) {
+controller('LivrerCtrl', function($scope,$state,$ionicLoading,$sessionStorage,Restangular,$auth,$ionicPopup,$localStorage) {
   /*le code de notre popover*/
   $scope.$on('$ionicView.enter', function(e) {
 
@@ -43,6 +43,7 @@ controller('LivrerCtrl', function($scope,$state,$ionicLoading,$sessionStorage,Re
       $auth.logout().then(function (response) {
         $ionicLoading.hide();
         delete $sessionStorage.token;
+        $localStorage.token = undefined;
         $state.go('connexion');
       },function (error) {
         $ionicLoading.hide();
@@ -50,6 +51,7 @@ controller('LivrerCtrl', function($scope,$state,$ionicLoading,$sessionStorage,Re
     },function (error) {
       $ionicLoading.hide();
       delete $sessionStorage.token;
+      $localStorage.token = undefined;
       $state.go('connexion');
     })
 

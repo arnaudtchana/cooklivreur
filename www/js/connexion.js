@@ -1,5 +1,5 @@
 App
-  .controller('ConnexionCtrl', function($scope, $ionicModal, $timeout,$state,$auth,$ionicLoading,$sessionStorage,$rootScope,Restangular) {
+  .controller('ConnexionCtrl', function($scope, $ionicModal, $timeout,$state,$auth,$ionicLoading,$sessionStorage,$rootScope,Restangular,$localStorage) {
     $scope.error = "";
     // Form data for the login modal
     $scope.loginData = {};
@@ -26,6 +26,8 @@ App
               console.log("voici la reponse du serveur",response)
             })
           });
+          $localStorage.token = response.data.token;
+          $localStorage.new_connection = true;
           $sessionStorage.token = response.data.token;
           $sessionStorage.data = response.data;
           $rootScope.userData = response.data.client;

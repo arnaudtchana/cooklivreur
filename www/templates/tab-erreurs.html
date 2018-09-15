@@ -4,7 +4,7 @@
     </button>
   </ion-nav-buttons>
   <ion-content>
-    <div class="card" ng-if="commande.status ==2 && commande.command_error_id!==null" ng-repeat="commande in liste_commande track by $index">
+    <div class="card" ng-if="(commande.status==0 || commande.status ==2) && commande.command_error_id" ng-repeat="commande in liste_commande track by $index">
       <div>
         <div class="row">
           <div class="col"></div>
@@ -48,6 +48,11 @@
         <div class="row">
           <div class="col text-center" style="color: red">
             {{commande.command_error.description}}
+          </div>
+        </div>
+        <div class="row" ng-if="commande.command_error.response">
+          <div class="col text-center" style="color: #4CAF50">
+            {{commande.command_error.response}}
           </div>
         </div>
         <div class="row">

@@ -77,7 +77,7 @@ var App=angular.module('starter', ['ionic','satellizer','ngStorage','restangular
   // Set up the various states which the app can be in.
   // Each state's controller can be found in controllers.js
   delete $httpProvider.defaults.headers.common['X-Requested-With'];
-  $authProvider.loginUrl = ApiUrl+'auth';
+  $authProvider.loginUrl = ApiUrl+'auth2';
   $authProvider.signupUrl = ApiUrl+'register';
   $httpProvider.interceptors.push('InterceptorFactory');
   var newBaseUrl = ApiUrl;
@@ -137,7 +137,7 @@ var App=angular.module('starter', ['ionic','satellizer','ngStorage','restangular
       //lorsquon envoi une requette on met le token dans lentete
       request : function(config) {
         console.log("je suis ici dans la requete de sortie");
-        config.headers.Authorization= "bearer "+$sessionStorage.token;
+        config.headers.Authorization= "bearer "+$localStorage.token;
         /*config.headers=["Access-Control-Allow-Origin", '*'];
         config.headers=['Access-Control-Allow-Methods', 'POST,GET,OPTIONS,PUT,DELETE'];
         config.headers=['Access-Control-Allow-Headers', 'Content-Type,Accept'];*/
@@ -185,7 +185,7 @@ var App=angular.module('starter', ['ionic','satellizer','ngStorage','restangular
             $localStorage.token = undefined;
 
             // Send the user to the auth state so they can login
-            $ionicLoading.hide();
+            //$ionicLoading.hide();
             $state.go('connexion');
           }
         });

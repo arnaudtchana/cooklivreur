@@ -31,20 +31,29 @@ var App=angular.module('starter', ['ionic','satellizer','ngStorage','restangular
     window.plugins.OneSignal.setSubscription(false);
     var notificationOpenedCallback = function(data) {
       console.log('notificationOpenedCallback: ' + JSON.stringify(data));
-      alert("je recoit la notification")
+      //alert("je recoit la notification")
       if(data.notification.payload.additionalData.channel == 2){
         /*on vient de vous attribuer une nouvelle commande on le redirige vers la page qui liste les commandes*/
-        alert("on vient de vous attribuer une commande")
+        //alert("on vient de vous attribuer une commande")
         if($state.current.name == 'tab.livraison') {
           /*on reload la page*/
           location.reload();
         }else{
-          /*on le redirige vers la page*/
+          /*on le redirige vers la page qui liste les commandes a livrer*/
+          $state.go('tab.livraison')
         }
       }
       if(data.notification.payload.additionalData.channel == 3){
         /*on vient de relever une erreur sur une de vos commandes on le redirige vers la paage de gestion des erreurs*/
-        alert("Erreur relevée sur une commande")
+        //alert("Erreur relevée sur une commande")
+        if($state.current.name == 'tab.erreurs') {
+          /*on reload la page*/
+          location.reload();
+        }else{
+          /*on le redirige vers la page qui liste les commandes a livrer*/
+          /*ici on doit egalement gerer est ce que lutilisateur est connecter ou pas*/
+          $state.go('tab.erreurs')
+        }
       }
     };
 

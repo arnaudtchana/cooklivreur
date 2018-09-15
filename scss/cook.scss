@@ -8,7 +8,7 @@
   padding-bottom: 0px;
 }
 .marge_haut{
-  padding-top: 20%;
+  padding-top: 15%;
 }
 .marge_from_haut{
   padding-top: 20%;
@@ -149,4 +149,9 @@ p .button:after{
   -ms-transition: all 1s ease-out;
   -o-transition: all 1s ease-out;
   transition: all 1s ease-out;
+}
+.cache_border{
+  border-top:none;
+  border-left:none;
+  border-right: none;
 }

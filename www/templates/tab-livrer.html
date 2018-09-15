@@ -8,7 +8,7 @@
       <div>
         <div class="row">
           <div class="col"></div>
-          <div class="col-80 text-center"><h6 style="text-decoration: underline;color: #33cd5f" ng-click="detail_commande($index)">{{commande.command_number}}</h6></div>
+          <div class="col-80 text-center"><h6>N° {{commande.command_number}}</h6></div>
           <div class="col"></div>
           <!--<div class="col affichage_liste_commande_gauche">Numéro commande:</div>
           <div class="col affichage_liste_commande">{{commande.command_number}}</div>-->
@@ -45,14 +45,12 @@
           <div class="col"></div>
         </div>
 
-        <!--<div class="row" ng-if="commande.status ==1 && commande.command_error==null">
-          <div class="col"></div>
-          <div class="col col-50 text-center">
-            <a  ng-click="commande_livrer($index)" class="button  button-balanced button_ajout_panier">
-              Livré</a>
+        <div class="row">
+          <div class="col text-center">
+            <a  ng-click="detail_commande($index)" style="padding: 0px 0px; min-height: 40px;background-color: #a2a2a2;color: white;font-size: 13px;line-height: 40px;border-radius: 5px;" class="button button-full">
+              Détails</a>
           </div>
-          <div class="col"></div>
-        </div>-->
+        </div>
       </div>
     </div>
 

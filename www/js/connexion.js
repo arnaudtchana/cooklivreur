@@ -1,5 +1,5 @@
 App
-  .controller('ConnexionCtrl', function($scope, $ionicModal, $timeout,$state,$auth,$ionicLoading,$sessionStorage,$rootScope,Restangular,$localStorage) {
+  .controller('ConnexionCtrl', function($scope, $ionicModal, $timeout,$state,$auth,$ionicLoading,$sessionStorage,$rootScope,Restangular,$localStorage,$ionicHistory) {
     $scope.error = "";
     // Form data for the login modal
     $scope.loginData = {};
@@ -34,6 +34,11 @@ App
           $sessionStorage.commands = response.data.commands;
           console.log("voici les donnees du user",$rootScope.userData)
           console.log($sessionStorage.data);
+          /*pour eviter que l'utilisateur revienne a la page de connection*/
+          $ionicHistory.nextViewOptions({
+            disableAnimate: true,
+            disableBack: true
+          })
           $state.go('tab.livraison');
         }else{
           /*on affiche le message d'erreur*/

@@ -10019,3 +10019,12 @@ p .button:after {
   border-top: none;
   border-left: none;
   border-right: none; }
+
+#enleve_bordure {
+  border-top: none;
+  border-left: none;
+  border-right: none; }
+
+#enleve_bordure_deux {
+  border-left: none;
+  border-right: none; }

@@ -8,7 +8,7 @@
 var ApiUrl = "https://at-deg.inimov-cloud.com/api/";
 var App=angular.module('starter', ['ionic','satellizer','ngStorage','restangular','ionic-toast','ngCordova'])
 
-.run(function($ionicPlatform,$state,$localStorage) {
+.run(function($ionicPlatform,$state,$localStorage,$ionicPopup,$ionicHistory) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs).
@@ -16,6 +16,21 @@ var App=angular.module('starter', ['ionic','satellizer','ngStorage','restangular
     // least on iOS. It's a dead giveaway that an app is using a Web View. However, it's sometimes
     // useful especially with forms, though we would prefer giving the user a little more room
     // to interact with the app.
+    /*on teste sil y a la connection*/
+    if(window.Connection) {
+      if (navigator.connection.type == Connection.NONE) {
+        /*on fait uen alert ici*/
+        $ionicPopup.confirm({
+          title: 'Erreur !',
+          content: "Vous n\'êtes pas connecté à internet "
+        })
+          .then(function (result) {
+            if (!result) {
+              ionic.Platform.exitApp();
+            }
+          });
+      }
+    }
     if (window.cordova && window.cordova.plugins && window.cordova.plugins.keyboard) {
       window.Keyboard.hideKeyboardAccessoryBar(true);
       cordova.plugins.Keyboard.disableScroll(true);
@@ -28,6 +43,10 @@ var App=angular.module('starter', ['ionic','satellizer','ngStorage','restangular
     }
     if($localStorage.token){
       $localStorage.new_connection = false;
+      $ionicHistory.nextViewOptions({
+        disableAnimate: true,
+        disableBack: true
+      })
       $state.go('tab.livraison')
     }
     /*consentement du user*/
@@ -88,6 +107,39 @@ var App=angular.module('starter', ['ionic','satellizer','ngStorage','restangular
       templateUrl:'templates/connexion.html',
       controller: 'ConnexionCtrl'
     })
+    .state('bar',{
+      url:'/bar',
+      abstract: true,
+      templateUrl:'templates/bar_compte.html',
+
+    })
+    .state('bar.email_reset',{
+      url:'/email_reset',
+      views: {
+        'bar_content' :{
+          templateUrl:'templates/email_reset.html'
+        }
+      },
+      controller: 'ResetPasswordCtrl'
+    })
+  $stateProvider.state('bar.envoie_code',{
+    url:'/envoie_code',
+    views: {
+      'bar_content' :{
+        templateUrl:'templates/code_verification_email.html'
+      }
+    },
+    controller: 'CodeVerificationCtrl'
+  })
+  $stateProvider.state('bar.enregistre_password',{
+    url:'/enregistre_password',
+    views: {
+      'bar_content' :{
+        templateUrl:'templates/new_password.html'
+      }
+    },
+    controller: 'EnregistrePasswordCtrl'
+  })
   // setup an abstract state for the tabs directive
     .state('tab', {
     url: '/tab',

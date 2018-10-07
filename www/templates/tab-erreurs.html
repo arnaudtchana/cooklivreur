@@ -4,6 +4,7 @@
     </button>
   </ion-nav-buttons>
   <ion-content>
+    <h5 style="text-align: center" ng-if="liste_commande.length == 0">Aucune erreur signalée</h5>
     <div class="card" ng-if="(commande.status==0 || commande.status ==2) && commande.command_error_id" ng-repeat="commande in liste_commande track by $index">
       <div>
         <div class="row">

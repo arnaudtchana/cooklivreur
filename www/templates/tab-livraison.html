@@ -4,7 +4,7 @@
     </button>
   </ion-nav-buttons>
   <ion-content>
-    <h5 style="text-align: center" ng-if="taille_tableau==0">Aucune commande assignée</h5>
+    <h5 style="text-align: center" ng-if="liste_commande.length == 0">Aucune commande assignée</h5>
     <div class="card" ng-if="commande.status == 1" ng-repeat="commande in liste_commande track by $index">
       <div>
         <div class="row">

@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-var ApiUrl = "https://at-deg.inimov-cloud.com/api/";
+var ApiUrl = "https://cook-cooning.quickdeveloppement.com/api/";
 var App=angular.module('starter', ['ionic','satellizer','ngStorage','restangular','ionic-toast','ngCordova'])
 
 .run(function($ionicPlatform,$state,$localStorage,$ionicPopup,$ionicHistory) {
